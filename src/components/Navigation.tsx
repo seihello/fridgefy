@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 import Link from 'next/link';
 import { Box, Center, Flex, NavLink, Stack, Title } from '@mantine/core'
 import { IconType } from 'react-icons';
@@ -19,17 +20,21 @@ const navItems: Array<NavItem> = [
 ]
 
 export default function Navigation() {
+
+  const [active, setActive] = useState(0);
+  
   return (
     <>
-      <Box>
+      <Box
+      bg='yellow.9'>
         <Stack
           w={300}
           h='100vh'
           py={20}
-          sx={{ borderRight: '1px solid black' }}
+          sx={{ boxShadow: '3px 3px 20px 5px #e0e0e0' }}
           spacing="none"
         >
-          <Center py="lg">
+          <Center py="lg" c='white'>
             <RiFridgeLine style={{
               fontSize: '24px',
             }} />
@@ -39,11 +44,21 @@ export default function Navigation() {
             <NavLink
               key={index}
               label={navItem.name}
+              active={index === active}
+              onClick={() => setActive(index)}
               icon={<navItem.icon />}
               href={navItem.path}
               component={Link}
               px="xl"
               py="sm"
+              variant='filled'
+              c='white'
+              color='orange.9'
+              sx={{
+                '&:hover': {
+                  color: 'red'
+                }
+              }}
             />
           ))}
         </Stack>
