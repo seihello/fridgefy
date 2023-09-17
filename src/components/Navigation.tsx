@@ -5,6 +5,7 @@ import { IconType } from 'react-icons';
 import { GiFruitBowl } from 'react-icons/gi'
 import { RiFridgeLine } from 'react-icons/ri';
 import { FiSearch } from 'react-icons/fi';
+import { MdMenuBook } from 'react-icons/md';
 
 type NavItem = {
   name: string;
@@ -12,8 +13,9 @@ type NavItem = {
   path: string;
 }
 const navItems: Array<NavItem> = [
-  { name: "My Fridge", icon: GiFruitBowl, path: "/exchange" },
-  { name: "Search Recipes", icon: FiSearch, path: "/stock" },
+  { name: "My Fridge", icon: GiFruitBowl, path: "/my-fridge" },
+  { name: "Search Recipes", icon: FiSearch, path: "/search-recipes" },
+  { name: "My Recipes", icon: MdMenuBook, path: "/my-recipes" },
 ]
 
 export default function Navigation() {
@@ -23,12 +25,14 @@ export default function Navigation() {
         <Stack
           w={300}
           h='100vh'
+          py={20}
           sx={{ borderRight: '1px solid black' }}
+          spacing="none"
         >
-          <Center>
+          <Center py="lg">
             <RiFridgeLine style={{
               fontSize: '24px',
-            }}/>
+            }} />
             <Title>Fridgefy</Title>
           </Center>
           {navItems.map((navItem, index) => (
@@ -38,7 +42,8 @@ export default function Navigation() {
               icon={<navItem.icon />}
               href={navItem.path}
               component={Link}
-              px={40}
+              px="xl"
+              py="sm"
             />
           ))}
         </Stack>
