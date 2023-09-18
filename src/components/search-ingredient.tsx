@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
-import { Group, Avatar, Text, MantineColor, SelectItemProps, Autocomplete } from '@mantine/core';
+import { Flex, Avatar, Text, SelectItemProps, Autocomplete } from '@mantine/core';
 import Papa from "papaparse";
 
 interface ItemProps extends SelectItemProps {
@@ -8,15 +8,15 @@ interface ItemProps extends SelectItemProps {
 }
 
 const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
-  ({ value, ...others }: ItemProps, ref) => (
+  ({ value, ingredient, ...others }: ItemProps, ref) => (
     <div ref={ref} {...others}>
-      <Group noWrap>
-        <Avatar src={``} />
-
-        <div>
-          <Text>{value}</Text>
-        </div>
-      </Group>
+      <Flex align='center' columnGap='xs'>
+        <Avatar
+          src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient}.jpg`}
+          size='sm'
+        />
+        <Text>{value}</Text>
+      </Flex>
     </div>
   )
 );
@@ -24,6 +24,8 @@ const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
 export default function IngredientSearchBox() {
 
   const [ingredientOptions, setIngredientOptions] = useState<ItemProps[]>([]);
+
+  setTimeout(() => { debugger }, 3000)
 
   useEffect(() => {
     const fetchCSV = async () => {
@@ -57,6 +59,12 @@ export default function IngredientSearchBox() {
       itemComponent={AutoCompleteItem}
       data={data}
       limit={10}
+      w={260}
+      sx={{
+        '& div[class$="itemsWrapper"]': {
+          padding: 0
+        },
+      }}
     />
   );
 }
