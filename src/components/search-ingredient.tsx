@@ -34,8 +34,8 @@ export default function IngredientSearchBox() {
         const blob = await response.blob();
 
         const reader = new FileReader();
-        reader.onload = ({ target }) => {
-          const csv = Papa.parse(target?.result, { header: true });
+        reader.onload = ({ target }: any) => {
+          const csv: Papa.ParseResult<ItemProps> = Papa.parse(target.result, { header: true });
           const parsedData = csv?.data;
           setIngredientOptions(parsedData);
         };
