@@ -1,6 +1,7 @@
-import { forwardRef, useEffect, useState } from 'react';
-import { Flex, Avatar, Text, SelectItemProps, Autocomplete } from '@mantine/core';
+import { forwardRef, useEffect, useState, useContext } from 'react';
+import { Flex, Avatar, Text, SelectItemProps, Autocomplete, Button } from '@mantine/core';
 import Papa from "papaparse";
+import { FridgeContext } from "@/context/fridge-context";
 
 interface ItemProps extends SelectItemProps {
   ingredient: string;
@@ -24,8 +25,11 @@ const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
 export default function IngredientSearchBox() {
 
   const [ingredientOptions, setIngredientOptions] = useState<ItemProps[]>([]);
+  const [inputIngredient, setInputIngredient] = useState<string>('');
 
-  setTimeout(() => { debugger }, 3000)
+  const fridgeContext = useContext(FridgeContext);
+  if (!fridgeContext) return null;
+  const { myFridge, myFridgeDispatch } = fridgeContext;
 
   useEffect(() => {
     const fetchCSV = async () => {
@@ -51,20 +55,36 @@ export default function IngredientSearchBox() {
 
 
   const data = ingredientOptions.map((item) => ({ ...item, value: item.ingredient }));
-  console.log(ingredientOptions);
+
+
+  const onClickedAddButton = () => {
+    myFridgeDispatch({
+      type: 'add',
+      payload: inputIngredient
+    });
+  }
 
   return (
-    <Autocomplete
-      placeholder="Search for Ingredient"
-      itemComponent={AutoCompleteItem}
-      data={data}
-      limit={10}
-      w={260}
-      sx={{
-        '& div[class$="itemsWrapper"]': {
-          padding: 0
-        },
-      }}
-    />
+    <Flex>
+      <Autocomplete
+        placeholder="Search for Ingredient"
+        itemComponent={AutoCompleteItem}
+        data={data}
+        limit={10}
+        w={260}
+        onChange={(value) => setInputIngredient(value)}
+        sx={{
+          '& div[class$="itemsWrapper"]': {
+            padding: 0
+          },
+        }}
+      />
+      <Button
+        onClick={onClickedAddButton}
+        color='orange'
+      >
+        Add
+      </Button>
+    </Flex>
   );
 }
