@@ -65,7 +65,7 @@ export default function IngredientSearchBox() {
   }
 
   return (
-    <Flex>
+    <Flex columnGap='xs'>
       <Autocomplete
         placeholder="Search for Ingredient"
         itemComponent={AutoCompleteItem}

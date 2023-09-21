@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import Navigation from '@/components/Navigation'
-import { Flex, MantineProvider } from '@mantine/core'
+import { Box, Flex, MantineProvider } from '@mantine/core'
 import { FridgeContextProvider } from '@/context/fridge-context'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -16,9 +16,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <aside>
               <Navigation />
             </aside>
-            <main>
+            <Box
+              component='main'
+              w='100%'>
               <Component {...pageProps} />
-            </main>
+            </Box>
           </Flex>
         </FridgeContextProvider>
       </MantineProvider>

@@ -22,11 +22,12 @@ const navItems: Array<NavItem> = [
 export default function Navigation() {
 
   const [active, setActive] = useState(0);
-  
+
   return (
     <>
       <Box
-      bg='yellow.9'>
+        component='nav'
+        bg='yellow.9'>
         <Stack
           w={300}
           h='100vh'
