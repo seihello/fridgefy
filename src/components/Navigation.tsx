@@ -1,7 +1,6 @@
-import React from 'react'
 import { useState } from 'react';
 import Link from 'next/link';
-import { Box, Center, Flex, NavLink, Stack, Title } from '@mantine/core'
+import { Box, Center, NavLink, Stack, Title } from '@mantine/core'
 import { IconType } from 'react-icons';
 import { GiFruitBowl } from 'react-icons/gi'
 import { RiFridgeLine } from 'react-icons/ri';
@@ -13,6 +12,7 @@ type NavItem = {
   icon: IconType;
   path: string;
 }
+
 const navItems: Array<NavItem> = [
   { name: "My Fridge", icon: GiFruitBowl, path: "/my-fridge" },
   { name: "Search Recipes", icon: FiSearch, path: "/search-recipes" },
