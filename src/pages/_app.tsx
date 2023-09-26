@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Navigation from '@/components/Navigation'
 import { Box, Flex, MantineProvider } from '@mantine/core'
 import { FridgeContextProvider } from '@/context/fridge-context'
+import { RecipeContextProvider } from '@/context/recipe-context'
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -18,16 +19,18 @@ export default function App({ Component, pageProps }: AppProps) {
         withNormalizeCSS
       >
         <FridgeContextProvider>
-          <Flex>
-            <aside>
-              <Navigation />
-            </aside>
-            <Box
-              component='main'
-              w='100%'>
-              <Component {...pageProps} />
-            </Box>
-          </Flex>
+          <RecipeContextProvider>
+            <Flex>
+              <aside>
+                <Navigation />
+              </aside>
+              <Box
+                component='main'
+                w='100%'>
+                <Component {...pageProps} />
+              </Box>
+            </Flex>
+          </RecipeContextProvider>
         </FridgeContextProvider>
       </MantineProvider>
 

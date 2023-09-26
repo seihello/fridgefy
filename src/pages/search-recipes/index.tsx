@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "@mantine/core";
+import CuisineFilter from "@/components/filters/cuisine-filter";
 
 export default function SearchRecipes() {
 
@@ -23,6 +24,7 @@ export default function SearchRecipes() {
       p="xl"
     >
       Search Recipes
+      <CuisineFilter />
     </Container>
   )
 }
