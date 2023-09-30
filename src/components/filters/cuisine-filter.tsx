@@ -5,9 +5,7 @@ import { RecipeContext } from '@/context/recipe-context';
 
 export default function CuisineFilter() {
 
-  const { selectedCuisines, setSelectedCuisines } = useContext(RecipeContext);
-
-  console.log(selectedCuisines);
+  const { setSelectedCuisines } = useContext(RecipeContext);
 
   return (
     <MultiSelect

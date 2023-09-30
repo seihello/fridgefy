@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Container } from "@mantine/core";
+import { Stack, Flex } from "@mantine/core";
 import CuisineFilter from "@/components/filters/cuisine-filter";
+import IntoleranceFilter from "@/components/filters/intolerance-filter";
 
 export default function SearchRecipes() {
 
@@ -20,11 +21,16 @@ export default function SearchRecipes() {
     fetchRecipes();
   }, []);
   return (
-    <Container
+    <Stack
       p="xl"
     >
       Search Recipes
-      <CuisineFilter />
-    </Container>
+      <Flex columnGap="sm">
+        <CuisineFilter />
+        <IntoleranceFilter />
+      </Flex>
+
+      
+    </Stack>
   )
 }
