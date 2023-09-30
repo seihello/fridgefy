@@ -3,6 +3,7 @@ import { Stack, Flex } from "@mantine/core";
 import CuisineFilter from "@/components/filters/cuisine-filter";
 import IntoleranceFilter from "@/components/filters/intolerance-filter";
 import FilteredRecipes from "@/components/filtered-recipes";
+import FridgeFilter from "@/components/filters/fridge-filter";
 
 export default function SearchRecipes() {
 
@@ -11,9 +12,10 @@ export default function SearchRecipes() {
       p="xl"
     >
       Search Recipes
-      <Flex columnGap="sm">
+      <Flex align="center" columnGap="sm">
         <CuisineFilter />
         <IntoleranceFilter />
+        <FridgeFilter />
       </Flex>
 
       <FilteredRecipes />
