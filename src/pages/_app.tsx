@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
               </aside>
               <Box
                 component='main'
+                ml={300}
                 w='100%'>
                 <Component {...pageProps} />
               </Box>

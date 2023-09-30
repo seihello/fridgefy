@@ -27,7 +27,9 @@ export default function Navigation() {
     <>
       <Box
         component='nav'
-        bg='yellow.9'>
+        bg='yellow.9'
+        pos='fixed'
+        >
         <Stack
           w={300}
           h='100vh'
