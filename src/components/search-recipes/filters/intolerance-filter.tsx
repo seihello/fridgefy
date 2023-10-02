@@ -9,7 +9,7 @@ export default function IntoleranceFilter() {
 
   return (
     <MultiSelect
-      maw={320}
+      w={320}
       placeholder="Introlerance"
       data={['Dairy', 'Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat']}
       onChange={setSelectedIntolerances}

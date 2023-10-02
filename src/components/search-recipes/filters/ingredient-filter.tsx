@@ -13,7 +13,7 @@ export default function IngredientFilter() {
 
   return (
     <MultiSelect
-      maw={320}
+      w={320}
       itemComponent={IngredientOption}
       placeholder="Ingredient"
       data={ingredientOptions}
