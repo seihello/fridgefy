@@ -13,11 +13,12 @@ type Query = {
   apiKey: string | undefined;
 }
 
+const API_KEYS: string[] = process.env.NEXT_PUBLIC_API_KEYS!.split(",");
+
 export default function FilteredRecipes() {
 
-  const { selectedCuisines, selectedIntolerances, selectedIngredients, isFridgeFilterChecked } = useContext(RecipeContext);
+  const { selectedCuisines, selectedIntolerances, selectedIngredients, isFridgeFilterChecked, isSearching, setIsSearching } = useContext(RecipeContext);
   const [recipes, setRecipes] = useState<any[]>([]);
-  const [filteredRecipes, setFilteredRecipes] = useState<any[]>([]);
 
   const [apiKeyIndex, setApiKeyIndex] = useState<number>(0);
 
@@ -26,7 +27,6 @@ export default function FilteredRecipes() {
       try {
         const result = await axios('/recipes.json');
         setRecipes(result.data.results);
-        setFilteredRecipes(result.data.results);
       } catch (error) {
         console.error('Error fetching the data', error);
       }
@@ -42,28 +42,33 @@ export default function FilteredRecipes() {
           cuisine: selectedCuisines,
           intolerances: selectedIntolerances,
           includeIngredients: selectedIngredients,
-          apiKey: process.env.NEXT_PUBLIC_API_KEYS?.split(",")[apiKeyIndex]
+          apiKey: API_KEYS[apiKeyIndex]
         };
-        console.log(queryString.stringify(query, {arrayFormat: 'comma'}));
-        const result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, {arrayFormat: 'comma'}));
-        console.log(result.data);
-        // setRecipes(result.data.results);
-        // setFilteredRecipes(result.data.results);
-      } catch (error) {
-        console.error('Error fetching the data', error);
+        const result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
+        setRecipes(result.data.results);
+        setIsSearching(false);
+      } catch (error: any) {
+        if (error.response?.status === 402 && apiKeyIndex < API_KEYS.length - 1) {
+          setApiKeyIndex(apiKeyIndex + 1);
+        } else {
+          console.log(error);
+          setIsSearching(false);
+        }
       }
     };
 
-    fetchRecipes();
-  }, [selectedCuisines, selectedIntolerances, selectedIngredients, isFridgeFilterChecked, apiKeyIndex]);
+    if (isSearching) {
+      fetchRecipes();
+    }
+  }, [isSearching, apiKeyIndex]);
 
   return (
     <Flex wrap="wrap" rowGap='xl' columnGap='md'>
-      {filteredRecipes.map((filteredRecipe) => {
+      {recipes.map((recipe) => {
         return (
           <FilteredRecipe
-            title={filteredRecipe.title}
-            image={filteredRecipe.image}
+            title={recipe.title}
+            image={recipe.image}
           />
         );
       })}

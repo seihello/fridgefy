@@ -10,6 +10,8 @@ type RecipeContextProps = {
   setSelectedIngredients: (selectedIngredients: string[]) => void;
   isFridgeFilterChecked: boolean;
   setIsFridgeFilterChecked: (fridgeFilterChecked: boolean) => void
+  isSearching: boolean;
+  setIsSearching: (isSearching: boolean) => void
 }
 
 export const RecipeContext = createContext<RecipeContextProps>({} as RecipeContextProps);
@@ -20,6 +22,7 @@ export function RecipeContextProvider({ children }: { children: ReactNode }) {
   const [selectedIntolerances, setSelectedIntolerances] = useState<string[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [isFridgeFilterChecked, setIsFridgeFilterChecked] = useState<boolean>(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   return (
     <RecipeContext.Provider
@@ -31,7 +34,9 @@ export function RecipeContextProvider({ children }: { children: ReactNode }) {
         selectedIngredients,
         setSelectedIngredients,
         isFridgeFilterChecked,
-        setIsFridgeFilterChecked
+        setIsFridgeFilterChecked,
+        isSearching,
+        setIsSearching
       }}
     >
       {children}
