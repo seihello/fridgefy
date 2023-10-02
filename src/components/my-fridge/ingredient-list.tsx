@@ -8,9 +8,9 @@ export default function IngredientList() {
 
   return (
     <Flex w='100%' gap={24} wrap='wrap'>
-      {myFridge.map((ingredient: string) => {
+      {myFridge.map((ingredient: string, index) => {
         return (
-          <IngredientCard name={ingredient} />
+          <IngredientCard key={index} name={ingredient} />
         )
       })}
 

@@ -60,9 +60,10 @@ export default function FilteredRecipes() {
 
   return (
     <Flex wrap="wrap" rowGap='xl' columnGap='md'>
-      {recipes.map((recipe) => {
+      {recipes.map((recipe, index) => {
         return (
           <FilteredRecipe
+            key={index}
             title={recipe.title}
             image={recipe.image}
           />
