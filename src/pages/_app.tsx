@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import Navigation from '@/components/Navigation'
+import Navigation from '@/components/nav/navigation'
 import { Box, Flex, MantineProvider } from '@mantine/core'
 import { FridgeContextProvider } from '@/context/fridge-context'
 import { RecipeContextProvider } from '@/context/recipe-context'
