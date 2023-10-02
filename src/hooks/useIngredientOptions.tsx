@@ -5,6 +5,9 @@ import Papa from "papaparse";
 export interface ItemProps extends SelectItemProps {
   ingredient: string;
   ingredientId: number;
+
+  value: string;
+  label: string;
 }
 
 const useIngredientOptions = () => {
@@ -21,7 +24,8 @@ const useIngredientOptions = () => {
         reader.onload = ({ target }: any) => {
           const csv: Papa.ParseResult<ItemProps> = Papa.parse(target.result, { header: true });
           const parsedData = csv?.data;
-          setIngredientOptions(parsedData);
+          const propsOptions = parsedData.map((item) => ({ ...item, value: item.ingredient, label: item.ingredient}))
+          setIngredientOptions(propsOptions);
         };
         reader.readAsText(blob);
 

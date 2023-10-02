@@ -14,8 +14,6 @@ export default function IngredientSearchBox() {
 
   const ingredientOptions = useIngredientOptions();
 
-  const data = ingredientOptions.map((item) => ({ ...item, value: item.ingredient }));
-
   const onClickedAddButton = () => {
     myFridgeDispatch({
       type: 'add',
@@ -28,7 +26,7 @@ export default function IngredientSearchBox() {
       <Autocomplete
         placeholder="Search for Ingredient"
         itemComponent={IngredientOption}
-        data={data}
+        data={ingredientOptions}
         limit={10}
         w={260}
         onChange={(value) => setInputIngredient(value)}
