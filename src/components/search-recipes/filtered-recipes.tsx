@@ -13,18 +13,13 @@ type Query = {
   includeIngredients: string[] | undefined;
   number: number;
   sort: string;
-  apiKey: string | undefined;
 }
-
-const API_KEYS: string[] = process.env.NEXT_PUBLIC_API_KEYS!.split(",");
 
 export default function FilteredRecipes() {
 
   const { selectedCuisines, selectedIntolerances, selectedIngredients, isFridgeFilterChecked, isSearching, setIsSearching } = useContext(RecipeContext);
   const { myFridge } = useContext(FridgeContext);
   const [recipes, setRecipes] = useState<any[]>([]);
-
-  const [apiKeyIndex, setApiKeyIndex] = useState<number>(0);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -47,26 +42,21 @@ export default function FilteredRecipes() {
           intolerances: selectedIntolerances,
           includeIngredients: isFridgeFilterChecked ? selectedIngredients.concat(myFridge) : selectedIngredients,
           number: 100,
-          sort: "random",
-          apiKey: API_KEYS[apiKeyIndex]
+          sort: "popularity",
         };
-        const result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
+        const result = await axios('/api/recipes?' + queryString.stringify(query, { arrayFormat: 'comma' }));
         setRecipes(result.data.results);
-        setIsSearching(false);
       } catch (error: any) {
-        if (error.response?.status === 402 && apiKeyIndex < API_KEYS.length - 1) {
-          setApiKeyIndex(apiKeyIndex + 1);
-        } else {
-          console.log(error);
-          setIsSearching(false);
-        }
+        console.error("Failed to search for recipes");
+      } finally {
+        setIsSearching(false);
       }
     };
 
     if (isSearching) {
       fetchRecipes();
     }
-  }, [isSearching, apiKeyIndex]);
+  }, [isSearching]);
 
   return (
     <Flex wrap="wrap" rowGap='xl' columnGap='md'>
