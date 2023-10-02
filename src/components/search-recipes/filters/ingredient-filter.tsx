@@ -9,7 +9,7 @@ export default function IngredientFilter() {
 
   const ingredientOptions = useIngredientOptions();
 
-  const { setSelectedIntolerances } = useContext(RecipeContext);
+  const { setSelectedIngredients } = useContext(RecipeContext);
 
   return (
     <MultiSelect
@@ -17,7 +17,7 @@ export default function IngredientFilter() {
       itemComponent={IngredientOption}
       placeholder="Ingredient"
       data={ingredientOptions}
-      // onChange={setSelectedIntolerances}
+      onChange={setSelectedIngredients}
       limit={10}
       clearable
       searchable
