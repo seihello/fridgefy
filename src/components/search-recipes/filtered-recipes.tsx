@@ -10,6 +10,8 @@ type Query = {
   cuisine: string[] | undefined;
   intolerances: string[] | undefined;
   includeIngredients: string[] | undefined;
+  number: number;
+  sort: string;
   apiKey: string | undefined;
 }
 
@@ -42,6 +44,8 @@ export default function FilteredRecipes() {
           cuisine: selectedCuisines,
           intolerances: selectedIntolerances,
           includeIngredients: selectedIngredients,
+          number: 100,
+          sort: "random",
           apiKey: API_KEYS[apiKeyIndex]
         };
         const result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
