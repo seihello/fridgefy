@@ -14,34 +14,29 @@ export default function IngredientSearchBox() {
 
   const ingredientOptions = useIngredientOptions();
 
-  const onClickedAddButton = () => {
-    myFridgeDispatch({
-      type: 'add',
-      payload: inputIngredient
-    });
-  }
-
   return (
     <Flex columnGap='xs'>
       <Autocomplete
-        placeholder="Search for Ingredient"
+        placeholder="Add Ingredient"
         itemComponent={IngredientOption}
         data={ingredientOptions}
+        value={inputIngredient}
         limit={10}
         w={260}
         onChange={(value) => setInputIngredient(value)}
+        onItemSubmit={(target) => {
+          myFridgeDispatch({
+            type: 'add',
+            payload: target.value
+          });
+          setInputIngredient("");
+        }}
         sx={{
           '& div[class$="itemsWrapper"]': {
             padding: 0
           },
         }}
       />
-      <Button
-        onClick={onClickedAddButton}
-        color='orange'
-      >
-        Add
-      </Button>
     </Flex>
   );
 }

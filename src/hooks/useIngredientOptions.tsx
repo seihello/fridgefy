@@ -3,9 +3,6 @@ import { SelectItemProps } from "@mantine/core";
 import Papa from "papaparse";
 
 export interface ItemProps extends SelectItemProps {
-  ingredient: string;
-  ingredientId: number;
-
   value: string;
   label: string;
 }
@@ -22,10 +19,9 @@ const useIngredientOptions = () => {
 
         const reader = new FileReader();
         reader.onload = ({ target }: any) => {
-          const csv: Papa.ParseResult<ItemProps> = Papa.parse(target.result, { header: true });
-          const parsedData = csv?.data;
-          const propsOptions = parsedData.map((item) => ({ ...item, value: item.ingredient, label: item.ingredient}))
-          setIngredientOptions(propsOptions);
+          const csv: Papa.ParseResult<any> = Papa.parse(target.result, { header: true });
+          const rows = csv?.data;
+          setIngredientOptions(rows.map((row) => ({ value: row.ingredient, label: row.ingredient})));
         };
         reader.readAsText(blob);
 

@@ -13,6 +13,7 @@ export default function IntoleranceFilter() {
       placeholder="Introlerance"
       data={['Dairy', 'Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat']}
       onChange={setSelectedIntolerances}
+      clearable
     />
   )
 }
