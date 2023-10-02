@@ -1,12 +1,34 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Box, Center, NavLink, Stack, Title } from '@mantine/core'
+import { Box, Button, Center, NavLink, Stack, Title } from '@mantine/core'
 import { IconType } from 'react-icons';
 import { GiFruitBowl } from 'react-icons/gi'
 import { RiFridgeLine } from 'react-icons/ri';
 import { FiSearch } from 'react-icons/fi';
 import { MdMenuBook } from 'react-icons/md';
+
+import {
+  getAuth,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAUXI07eMpVmh0qiIgvqQUBc4RDdjCA1qY",
+  authDomain: "fridgefy-2a2a1.firebaseapp.com",
+  projectId: "fridgefy-2a2a1",
+  storageBucket: "fridgefy-2a2a1.appspot.com",
+  messagingSenderId: "985145473165",
+  appId: "1:985145473165:web:e574f34c3f4f9a68178ac4"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+const provider = new GoogleAuthProvider();
 
 type NavItem = {
   name: string;
@@ -30,7 +52,7 @@ export default function Navigation() {
         component='nav'
         bg='yellow.9'
         pos='fixed'
-        >
+      >
         <Stack
           w={300}
           h='100vh'
@@ -64,8 +86,20 @@ export default function Navigation() {
               }}
             />
           ))}
-        </Stack>
-      </Box>
+
+          <Button w={100} mx='auto' onClick={() => {
+            const auth = getAuth();
+            signInWithPopup(auth, provider)
+              .then((result) => {
+                const user = result.user;
+                console.log(user);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          }}>Login</Button>
+      </Stack>
+    </Box >
     </>
   )
 }
