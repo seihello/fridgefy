@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Flex } from '@mantine/core'
 import { useContext, useEffect } from 'react';
+import { Flex } from '@mantine/core'
 import { RecipeContext } from '@/context/recipe-context';
 import axios from 'axios';
 import FilteredRecipe from './filtered-recipe';

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Flex, Autocomplete, Button } from '@mantine/core';
 import { FridgeContext } from "@/context/fridge-context";
 import useIngredientOptions from '@/hooks/useIngredientOptions';
-import IngredientOption from './ingredient-option';
+import IngredientOption from '../common/ingredient-option';
 
 export default function IngredientSearchBox() {
 

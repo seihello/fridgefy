@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Stack, Flex } from "@mantine/core";
-import CuisineFilter from "@/components/filters/cuisine-filter";
-import IntoleranceFilter from "@/components/filters/intolerance-filter";
-import FilteredRecipes from "@/components/filtered-recipes";
-import FridgeFilter from "@/components/filters/fridge-filter";
-import IngredientFilter from "@/components/filters/ingredient-filter";
+import CuisineFilter from "@/components/search-recipes/filters/cuisine-filter";
+import IntoleranceFilter from "@/components/search-recipes/filters/intolerance-filter";
+import FilteredRecipes from "@/components/search-recipes/filtered-recipes";
+import FridgeFilter from "@/components/search-recipes/filters/fridge-filter";
+import IngredientFilter from "@/components/search-recipes/filters/ingredient-filter";
 
 export default function SearchRecipes() {
 
