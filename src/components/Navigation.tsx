@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Box, Center, NavLink, Stack, Title } from '@mantine/core'
@@ -21,7 +22,7 @@ const navItems: Array<NavItem> = [
 
 export default function Navigation() {
 
-  const [active, setActive] = useState(0);
+  const currentPath = useRouter().pathname;
 
   return (
     <>
@@ -47,8 +48,7 @@ export default function Navigation() {
             <NavLink
               key={index}
               label={navItem.name}
-              active={index === active}
-              onClick={() => setActive(index)}
+              active={navItem.path === currentPath}
               icon={<navItem.icon />}
               href={navItem.path}
               component={Link}
