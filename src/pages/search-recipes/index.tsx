@@ -16,7 +16,7 @@ export default function SearchRecipes() {
       p="xl"
     >
       Search Recipes
-      <Flex align="center" columnGap="sm">
+      <Flex align="center" rowGap="sm" columnGap="sm" wrap="wrap">
         <CuisineFilter />
         <IntoleranceFilter />
         <IngredientFilter />
