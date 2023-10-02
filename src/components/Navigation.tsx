@@ -59,7 +59,7 @@ export default function Navigation() {
               color='orange.9'
               sx={{
                 '&:hover': {
-                  color: 'red'
+                  color: navItem.path === currentPath ? 'white' : 'red'
                 }
               }}
             />
