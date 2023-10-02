@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useContext, useEffect } from 'react';
 import { Flex } from '@mantine/core'
 import { RecipeContext } from '@/context/recipe-context';
+import { FridgeContext } from '@/context/fridge-context';
 import axios from 'axios';
 import queryString from 'query-string';
 import FilteredRecipe from './filtered-recipe';
@@ -20,6 +21,7 @@ const API_KEYS: string[] = process.env.NEXT_PUBLIC_API_KEYS!.split(",");
 export default function FilteredRecipes() {
 
   const { selectedCuisines, selectedIntolerances, selectedIngredients, isFridgeFilterChecked, isSearching, setIsSearching } = useContext(RecipeContext);
+  const { myFridge } = useContext(FridgeContext);
   const [recipes, setRecipes] = useState<any[]>([]);
 
   const [apiKeyIndex, setApiKeyIndex] = useState<number>(0);
@@ -43,7 +45,7 @@ export default function FilteredRecipes() {
         const query: Query = {
           cuisine: selectedCuisines,
           intolerances: selectedIntolerances,
-          includeIngredients: selectedIngredients,
+          includeIngredients: isFridgeFilterChecked ? selectedIngredients.concat(myFridge) : selectedIngredients,
           number: 100,
           sort: "random",
           apiKey: API_KEYS[apiKeyIndex]
