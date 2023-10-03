@@ -1,12 +1,11 @@
 import React from 'react'
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Button, Stack, Flex, Avatar, Text } from '@mantine/core'
 import {
   getAuth,
   signInWithPopup,
   signOut,
   GoogleAuthProvider,
-  UserInfo,
 } from "firebase/auth";
 import { UserContext } from '@/context/user-context';
 

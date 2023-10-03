@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 
 type UserStatus = {
   email: string,

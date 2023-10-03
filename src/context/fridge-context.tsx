@@ -1,4 +1,5 @@
-import React, { createContext, useReducer, ReactNode, useEffect } from "react";
+import React, { createContext, useReducer, ReactNode, useEffect, useContext } from "react";
+import { UserContext } from "./user-context";
 
 import { getDatabase, ref, set, get } from "firebase/database";
 import { database } from "@/pages/_app";
@@ -36,7 +37,9 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
         );
         if (!foundIngredient) {
           const newFridge = [...state, action.payload];
-          addIngredientToDd("momoiropuchoman@gmail.com", newFridge);
+          if(userStatus) {
+            addIngredientToDd(userStatus?.email, newFridge);
+          }
           return newFridge;
         } else {
           alert(`${action.payload} has already been in My Fridge.`);
@@ -55,12 +58,11 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
   };
 
   const [myFridge, myFridgeDispatch] = useReducer(myFridgeReducer, []);
+  const { userStatus } = useContext(UserContext);
 
   useEffect(() => {
     const fetchIngredients = async () => {
-      const email = "momoiropuchoman@gmail.com";
-      
-      crypto.subtle.digest("SHA-256", new TextEncoder().encode(email))
+      crypto.subtle.digest("SHA-256", new TextEncoder().encode(userStatus?.email))
         .then((hashBuffer) => {
           const hashArray = Array.from(new Uint8Array(hashBuffer));
           const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
@@ -83,7 +85,7 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
         });
     }
     fetchIngredients();
-  }, [])
+  }, [userStatus])
 
   return (
     <FridgeContext.Provider
