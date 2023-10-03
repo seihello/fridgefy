@@ -12,7 +12,8 @@ export default function IngredientSearchBox() {
   if (!fridgeContext) return null;
   const { myFridgeDispatch } = fridgeContext;
 
-  const ingredientOptions = useIngredientOptions();
+  // const ingredientOptions = useIngredientOptions();
+  const ingredientOptions: string[] = [];
 
   return (
     <Flex columnGap='xs'>
