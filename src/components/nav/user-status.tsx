@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Button, Stack, Flex, Avatar, Text } from '@mantine/core'
-
-
 import {
   getAuth,
   signInWithPopup,
@@ -12,6 +10,7 @@ import {
   UserInfo,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { getDatabase, ref, push } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -24,9 +23,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 const provider = new GoogleAuthProvider();
+
 
 export default function UserStatusComponent() {
 
@@ -41,6 +42,8 @@ export default function UserStatusComponent() {
       }
     });
   }, []);
+
+
 
   return (userInfo?.email && userInfo?.displayName && userInfo?.photoURL) ? (
     <Stack>

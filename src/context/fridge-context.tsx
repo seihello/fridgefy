@@ -1,5 +1,7 @@
 import React, { createContext, useReducer, ReactNode } from "react";
 
+import { getDatabase, ref, set } from "firebase/database";
+
 type State = string[];
 type Action =
   | {
@@ -28,11 +30,14 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
         );
         if (!foundIngredient) {
           const newFridge = [...state, action.payload];
+          addIngredientToDd("hoge@gmail.com", newFridge);
           return newFridge;
         } else {
           alert(`${action.payload} has already been in My Fridge.`);
           return state;
         }
+
+
 
       case 'remove':
         const newFridge = state.filter(
@@ -54,4 +59,18 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
       {children}
     </FridgeContext.Provider>
   );
+}
+
+
+function addIngredientToDd(email: string, ingredients: string[]) {
+  crypto.subtle.digest("SHA-256", new TextEncoder().encode(email))
+  .then((hashBuffer) => {
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    console.log(hashedHexEmail);
+    const db = getDatabase();
+    set(ref(db, `${hashedHexEmail}/myfridge`), {
+      ingredients
+    });
+  });
 }
