@@ -27,6 +27,10 @@ type FridgeContextProps = {
 export const FridgeContext = createContext<FridgeContextProps>({} as FridgeContextProps);
 
 export function FridgeContextProvider({ children }: { children: ReactNode }) {
+
+  
+  const { userStatus } = useContext(UserContext);
+
   const myFridgeReducer = function (state: State, action: Action) {
     switch (action.type) {
       case 'set':
@@ -58,7 +62,6 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
   };
 
   const [myFridge, myFridgeDispatch] = useReducer(myFridgeReducer, []);
-  const { userStatus } = useContext(UserContext);
 
   useEffect(() => {
     const fetchIngredients = async () => {
