@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, ReactNode, useEffect } from "react";
 
 import { getDatabase, ref, set, get } from "firebase/database";
+import { database } from "@/pages/_app";
 
 type State = string[];
 type Action =
@@ -64,8 +65,7 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
           const hashArray = Array.from(new Uint8Array(hashBuffer));
           const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
           console.log(hashedHexEmail);
-          const db = getDatabase();
-          get(ref(db, `${hashedHexEmail}/myfridge`)).then((snapshot) => {
+          get(ref(database, `${hashedHexEmail}/myfridge`)).then((snapshot) => {
             if (snapshot.exists()) {
               console.log(snapshot.val());
               let ingredients: string[] = snapshot.val().ingredients;
@@ -101,8 +101,7 @@ function addIngredientToDd(email: string, ingredients: string[]) {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       console.log(hashedHexEmail);
-      const db = getDatabase();
-      set(ref(db, `${hashedHexEmail}/myfridge`), {
+      set(ref(database, `${hashedHexEmail}/myfridge`), {
         ingredients
       });
     });
