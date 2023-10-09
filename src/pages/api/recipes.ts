@@ -9,17 +9,21 @@ export default async function handler(
 
   const API_KEYS: string[] = process.env.NEXT_PUBLIC_API_KEYS!.split(",");
 
-  let result: any;
+  let responseData: any;
   let status: number = 500;
   for(let i = 0; i < API_KEYS.length; i++) {
     const query = { apiKey: API_KEYS[i], ...req.query};
     
     try {
-      result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
+      const result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
       status = result.status;
-      res.status(status).json(result.data);
+      responseData = result.data;
+      break;
     } catch (error: any) {
-      res.status(error.response?.status).json(error);
+      status = error.response?.status;
+      responseData = { query };
     }
   }
+
+  res.status(status).json(responseData)  
 }
