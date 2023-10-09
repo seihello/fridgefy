@@ -47,7 +47,7 @@ export default function FilteredRecipes() {
         const result = await axios('/api/recipes?' + queryString.stringify(query, { arrayFormat: 'comma' }));
         setRecipes(result.data.results);
       } catch (error: any) {
-        console.error("Failed to search for recipes");
+        console.error(error);
       } finally {
         setIsSearching(false);
       }
