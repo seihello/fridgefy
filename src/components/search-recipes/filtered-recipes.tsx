@@ -27,7 +27,7 @@ export default function FilteredRecipes() {
         const result = await axios('/recipes.json');
         setRecipes(result.data.results);
       } catch (error) {
-        console.error('Error fetching the data', error);
+        console.error(error);
       }
     };
 

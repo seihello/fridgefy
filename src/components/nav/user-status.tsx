@@ -48,10 +48,6 @@ export default function UserStatusComponent() {
     <Button w={100} mx='auto' onClick={() => {
       const auth = getAuth();
       signInWithPopup(auth, provider)
-        .then((result) => {
-          const user = result.user;
-          console.log(user);
-        })
         .catch((error) => {
           console.error(error);
         });

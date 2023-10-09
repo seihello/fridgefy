@@ -26,7 +26,7 @@ const useIngredientOptions = () => {
         reader.readAsText(blob);
 
       } catch (error) {
-        console.error('Error fetching or reading CSV:', error);
+        console.error(error);
       }
     };
 

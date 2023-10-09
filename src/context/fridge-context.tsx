@@ -69,18 +69,14 @@ export function FridgeContextProvider({ children }: { children: ReactNode }) {
         .then((hashBuffer) => {
           const hashArray = Array.from(new Uint8Array(hashBuffer));
           const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-          console.log(hashedHexEmail);
           get(ref(database, `${hashedHexEmail}/myfridge`)).then((snapshot) => {
             if (snapshot.exists()) {
-              console.log(snapshot.val());
               let ingredients: string[] = snapshot.val().ingredients;
 
               myFridgeDispatch({
                 type: 'set',
                 payload: ingredients
               });
-            } else {
-              console.log("No data available");
             }
           }).catch((error) => {
             console.error(error);
@@ -105,7 +101,6 @@ function addIngredientToDd(email: string, ingredients: string[]) {
     .then((hashBuffer) => {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashedHexEmail = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      console.log(hashedHexEmail);
       set(ref(database, `${hashedHexEmail}/myfridge`), {
         ingredients
       });
