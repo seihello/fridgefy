@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useContext } from 'react';
-import { Button, Stack, Flex, Avatar, Text } from '@mantine/core'
+import { Stack, NavLink, Box } from '@mantine/core'
 import {
   getAuth,
   signInWithPopup,
@@ -8,6 +8,8 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { UserContext } from '@/context/user-context';
+import { BiLogIn, BiLogOut } from 'react-icons/bi';
+import { FaCircleUser } from 'react-icons/fa6';
 
 const provider = new GoogleAuthProvider();
 
@@ -18,7 +20,7 @@ export default function UserStatusComponent() {
   useEffect(() => {
     getAuth().onAuthStateChanged(async (user) => {
       if (user) {
-        setUserStatus({email: user.email!, name: user.displayName!, image: user.photoURL!});
+        setUserStatus({ email: user.email!, name: user.displayName!, image: user.photoURL! });
       } else {
         setUserStatus(null);
       }
@@ -26,31 +28,66 @@ export default function UserStatusComponent() {
   }, []);
 
   return userStatus ? (
-    <Stack>
-      <Flex
-        align='center'
-        columnGap='sm'
+    <Stack spacing={0}>
+      <NavLink
+        label={userStatus.name}
+        icon={<FaCircleUser />}
         px="xl"
         py="sm"
-      >
-        <Avatar src={userStatus.image} radius='xl' />
-        <Text c='white' size='sm'>{userStatus.name}</Text>
-      </Flex>
-      <Button w={100} mx='auto' onClick={() => {
+        variant='filled'
+        c='white'
+        color='orange.9'
+        sx={{
+          '&:hover': {
+            color: 'red'
+          }
+        }}
+      />
+      <Box onClick={() => {
         const auth = getAuth();
         signOut(auth)
           .catch((error) => {
             console.error(error);
           });
-      }}>Logout</Button>
+      }}>
+        <NavLink
+          label='Logout'
+          icon={<BiLogOut />}
+          px="xl"
+          py="sm"
+          variant='filled'
+          c='white'
+          color='orange.9'
+          sx={{
+            '&:hover': {
+              color: 'red'
+            }
+          }}
+        />
+      </Box>
     </Stack>
   ) : (
-    <Button w={100} mx='auto' onClick={() => {
+    <Box onClick={() => {
       const auth = getAuth();
       signInWithPopup(auth, provider)
         .catch((error) => {
           console.error(error);
         });
-    }}>Login</Button>
+    }}>
+      <NavLink
+        label='Login'
+        icon={<BiLogIn />}
+        px="xl"
+        py="sm"
+        variant='filled'
+        c='white'
+        color='orange.9'
+        sx={{
+          '&:hover': {
+            color: 'red'
+          }
+        }}
+      />
+    </Box>
   );
 }
