@@ -37,8 +37,8 @@ export default function Navigation() {
           w={300}
           h='100vh'
           py={20}
+          spacing={48}
           sx={{ boxShadow: '3px 3px 20px 5px #e0e0e0' }}
-          spacing="xl"
         >
           <Box>
             <Center py="lg" c='white'>
