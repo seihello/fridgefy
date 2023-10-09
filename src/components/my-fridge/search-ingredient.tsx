@@ -7,13 +7,10 @@ import IngredientOption from '../common/ingredient-option';
 export default function IngredientSearchBox() {
 
   const [inputIngredient, setInputIngredient] = useState<string>('');
+  const ingredientOptions = useIngredientOptions();
 
   const fridgeContext = useContext(FridgeContext);
-  if (!fridgeContext) return null;
   const { myFridgeDispatch } = fridgeContext;
-
-  // const ingredientOptions = useIngredientOptions();
-  const ingredientOptions: string[] = [];
 
   return (
     <Flex columnGap='xs'>
