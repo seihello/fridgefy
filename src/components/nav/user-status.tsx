@@ -39,7 +39,9 @@ export default function UserStatusComponent() {
         color='orange.9'
         sx={{
           '&:hover': {
-            color: 'red'
+            background: 'none',
+            color: 'white',
+            cursor: 'default'
           }
         }}
       />
