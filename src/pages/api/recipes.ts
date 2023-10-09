@@ -17,11 +17,9 @@ export default async function handler(
     try {
       result = await axios('https://api.spoonacular.com/recipes/complexSearch?' + queryString.stringify(query, { arrayFormat: 'comma' }));
       status = result.status;
-      break;
+      res.status(status).json(result.data);
     } catch (error: any) {
-      status = error.response?.status;
+      res.status(error.response?.status).json(error);
     }
   }
-
-  res.status(status).json(result.data)  
 }
