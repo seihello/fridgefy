@@ -13,6 +13,7 @@ type Query = {
   includeIngredients: string[] | undefined;
   number: number;
   sort: string;
+  addRecipeInformation: boolean;
 }
 
 export default function FilteredRecipes() {
@@ -43,6 +44,7 @@ export default function FilteredRecipes() {
           includeIngredients: isFridgeFilterChecked ? selectedIngredients.concat(myFridge) : selectedIngredients,
           number: 100,
           sort: "popularity",
+          addRecipeInformation: true
         };
         const result = await axios('/api/recipes?' + queryString.stringify(query, { arrayFormat: 'comma' }));
         setRecipes(result.data.results);
