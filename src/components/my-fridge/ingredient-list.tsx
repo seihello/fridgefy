@@ -7,7 +7,7 @@ export default function IngredientList() {
   const { myFridge } = useContext(FridgeContext);
 
   return (
-    <Flex w='100%' gap={24} wrap='wrap'>
+    <Flex w='100%' gap='1rem' wrap='wrap'>
       {myFridge.map((ingredient: string, index) => {
         return (
           <IngredientCard key={index} name={ingredient} />
