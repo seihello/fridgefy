@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Stack, Flex, Button } from "@mantine/core";
+import { Stack, Flex, Button, Title } from "@mantine/core";
 import { RecipeContext } from '@/context/recipe-context';
 import CuisineFilter from "@/components/search-recipes/filters/cuisine-filter";
 import IntoleranceFilter from "@/components/search-recipes/filters/intolerance-filter";
@@ -15,7 +15,7 @@ export default function SearchRecipes() {
     <Stack
       p="xl"
     >
-      Search Recipes
+      <Title order={2}>Search for Today's Recipe</Title>
       <Flex align="center" rowGap="sm" columnGap="sm" wrap="wrap">
         <CuisineFilter />
         <IntoleranceFilter />

@@ -33,6 +33,20 @@ export default function App({ Component, pageProps }: AppProps) {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
+        theme={{
+          fontFamily: "Hind, sans-serif",
+          headings: {
+            fontFamily: "Acme, sans-serif",
+          },
+          globalStyles: (theme) => ({
+            'h1, h2': {
+              letterSpacing: '1px',
+            },
+            'h2': {
+              color: '#E6770B!important'
+            },
+          }),
+        }}
       >
         <UserContextProvider>
           <FridgeContextProvider>
