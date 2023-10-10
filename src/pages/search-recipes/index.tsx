@@ -15,7 +15,7 @@ export default function SearchRecipes() {
     <Stack
       p="xl"
     >
-      <Title order={2}>Search for Today's Recipe</Title>
+      <Title order={2}>{`Search for Today's Recipe`}</Title>
       <Flex align="center" rowGap="sm" columnGap="sm" wrap="wrap">
         <CuisineFilter />
         <IntoleranceFilter />
