@@ -66,6 +66,7 @@ export default function FilteredRecipes() {
             key={index}
             title={recipe.title}
             image={recipe.image}
+            link={recipe.sourceUrl}
           />
         );
       })}
