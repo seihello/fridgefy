@@ -8,7 +8,7 @@ export default function MyFridge() {
     <Stack
       p="xl"
     >
-      <Title order={2}>Add ingredients to your fridge</Title>
+      <Title order={2}>Add Ingredients to Your Fridge</Title>
       <IngredientSearchBox />
       <IngredientList />
     </Stack>
