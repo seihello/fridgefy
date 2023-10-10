@@ -19,7 +19,7 @@ type NavItem = {
 const navItems: Array<NavItem> = [
   { name: "My Fridge", icon: GiFruitBowl, path: "/my-fridge" },
   { name: "Search for Recipes", icon: FiSearch, path: "/search-recipes" },
-  { name: "My Recipes", icon: MdMenuBook, path: "/my-recipes" },
+  // { name: "My Recipes", icon: MdMenuBook, path: "/my-recipes" },
 ]
 
 export default function Navigation() {
