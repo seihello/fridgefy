@@ -9,12 +9,12 @@ import { getDatabase } from 'firebase/database';
 import { UserContextProvider } from '@/context/user-context'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAUXI07eMpVmh0qiIgvqQUBc4RDdjCA1qY",
-  authDomain: "fridgefy-2a2a1.firebaseapp.com",
-  projectId: "fridgefy-2a2a1",
-  storageBucket: "fridgefy-2a2a1.appspot.com",
-  messagingSenderId: "985145473165",
-  appId: "1:985145473165:web:e574f34c3f4f9a68178ac4"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
 // Initialize Firebase
