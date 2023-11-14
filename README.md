@@ -1,4 +1,4 @@
-# Compass Card Manager
+# Fridgefy
 Users can manage ingredients they have in fridge and search for recipes with filters.
 ![Showcase](https://www.seisuke.info/img/fridgefy.png)
 
